@@ -2,6 +2,6 @@
   "buildCommand": "cd dispatch-pro-ready/dispatch-pro && npm install && npm run build",
   "outputDirectory": "dispatch-pro-ready/dispatch-pro/dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/dispatch-pro-ready/dispatch-pro/dist/index.html" }
   ]
 }
