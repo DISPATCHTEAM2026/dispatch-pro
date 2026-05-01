@@ -1,7 +1,0 @@
-{
-  "buildCommand": "cd dispatch-pro-ready/dispatch-pro && npm install && npm run build",
-  "outputDirectory": "dispatch-pro-ready/dispatch-pro/dist",
-  "routes": [
-    { "src": "/(.*)", "dest": "/dispatch-pro-ready/dispatch-pro/index.html" }
-  ]
-}
