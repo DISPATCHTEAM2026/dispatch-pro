@@ -1,6 +1,7 @@
 
 import React, { useMemo, useState } from "react";
-
+import { auth } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 const initialJobs = [
   { date: "04/26/2026", time: "1:54 PM", invoice: "DA-1984-95", company: "S&R", location: "EL PASO, TX", reference: "TRK#77 TRL#U90350", supervisor: "DANIEL / JOSE", status: "TERMINADO", priority: "NORMAL", tech: "MARIO ELP", pago: "PAID", invoiceStatus: "PAID ZELLE (A)", total: 1473.8, parts: 60.61, labor: 350 },
   { date: "04/26/2026", time: "2:45 PM", invoice: "", company: "(651) 214-6844", location: "ALBUQUERQUE, NM", reference: "", supervisor: "DANIEL", status: "CANCELADO", priority: "LOW", tech: "", pago: "", invoiceStatus: "", total: 0, parts: 0, labor: 0 },
@@ -58,7 +59,14 @@ export default function App() {
     setJobs([job, ...jobs]);
     setForm({ company: "", location: "", tech: "", reference: "", supervisor: "", total: "", parts: "", labor: "" });
   }
-
+const handleLogin = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, loginEmail, "password123");
+    setIsLoggedIn(true);
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+};
   if (!isLoggedIn) {
     return (
       <div style={loginPage}>
@@ -74,7 +82,7 @@ export default function App() {
           <select value={userRole} onChange={(e) => setUserRole(e.target.value)} style={input}>
             <option>Admin</option><option>Dispatcher</option><option>Viewer</option>
           </select>
-          <button onClick={() => setIsLoggedIn(true)} style={primaryFull}>Sign In</button>
+          <button onClick={handleLogin} style={primaryFull}>Sign In</button>
           <p style={{textAlign:"center", color:"#64748b", fontSize:12}}>Demo login preview</p>
         </div>
       </div>
